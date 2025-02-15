@@ -1,20 +1,14 @@
-# Trend Finder 🔦
+# AI Trend Surfer 🔦
 
 **Stay on top of trending topics on social media — all in one place.**
 
-Trend Finder collects and analyzes posts from key influencers, then sends a Slack notification when it detects new trends or product launches. This has been a complete game-changer for the Firecrawl marketing team by:
+Trend Surfer collects and analyzes posts from key influencers, then sends a Slack notification when it detects new trends or product launches. This has been a complete game-changer for the Firecrawl marketing team by:
 
 - **Saving time** normally spent manually searching social channels
 - **Keeping you informed** of relevant, real-time conversations
 - **Enabling rapid response** to new opportunities or emerging industry shifts
 
 _Spend less time hunting for trends and more time creating impactful campaigns._
-
-## Watch the Demo & Tutorial video
-
-[![Thumbnail](https://i.ytimg.com/vi/puimQSun92g/hqdefault.jpg)](https://www.youtube.com/watch?v=puimQSun92g)
-
-Learn how to set up Trend Finder and start monitoring trends in this video!
 
 ## How it Works
 
@@ -88,7 +82,7 @@ SLACK_WEBHOOK_URL=https://hooks.slack.com/services/YOUR/WEBHOOK/URL
 1. **Clone the repository:**
    ```bash
    git clone [repository-url]
-   cd trend-finder
+   cd trend-surfer
    ```
 
 2. **Install dependencies:**
@@ -138,7 +132,7 @@ SLACK_WEBHOOK_URL=https://hooks.slack.com/services/YOUR/WEBHOOK/URL
 ## Project Structure
 
 ```
-trend-finder/
+trend-surfer/
 ├── src/
 │   ├── controllers/    # Request handlers
 │   ├── services/       # Business logic
