@@ -7,6 +7,10 @@ dotenv.config();
 async function main() {
   console.log(`Starting process to generate draft...`);
   await handleCron();
+  cron.schedule(`0 17 * * *`, async () => {
+    console.log(`Starting process to generate draft...`);
+    await handleCron();
+  });
 }
 main();
 

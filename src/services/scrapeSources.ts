@@ -1,7 +1,7 @@
-import FirecrawlApp from '@mendable/firecrawl-js';
-import dotenv from 'dotenv';
+import FirecrawlApp from "@mendable/firecrawl-js";
+import dotenv from "dotenv";
 // Removed Together import
-import { z } from 'zod';
+import { z } from "zod";
 // Removed zodToJsonSchema import since we no longer enforce JSON output via Together
 
 dotenv.config();
@@ -17,9 +17,9 @@ const StorySchema = z.object({
 });
 
 const StoriesSchema = z.object({
-  stories: z.array(StorySchema).describe(
-    "A list of today's AI or LLM-related stories"
-  ),
+  stories: z
+    .array(StorySchema)
+    .describe("A list of today's AI or LLM-related stories"),
 });
 
 export async function scrapeSources(sources: string[]) {
@@ -61,7 +61,9 @@ export async function scrapeSources(sources: string[]) {
           });
 
           if (!response.ok) {
-            throw new Error(`Failed to fetch tweets for ${username}: ${response.statusText}`);
+            throw new Error(
+              `Failed to fetch tweets for ${username}: ${response.statusText}`
+            );
           }
 
           const tweets = await response.json();
@@ -79,10 +81,7 @@ export async function scrapeSources(sources: string[]) {
             });
             combinedText.stories.push(...stories);
           } else {
-            console.error(
-              "Expected tweets.data to be an array:",
-              tweets.data
-            );
+            console.error("Expected tweets.data to be an array:", tweets.data);
           }
         }
       }
@@ -114,21 +113,33 @@ export async function scrapeSources(sources: string[]) {
         `;
 
         // Use app.extract(...) directly
-        const scrapeResult = await app.extract(
-          [source],
-          {
-            prompt: promptForFirecrawl,
-            schema: StoriesSchema, // The Zod schema for expected JSON
-          }
-        );
+        // const scrapeResult = await app.extract(
+        //   [source],
+        //   {
+        //     prompt: promptForFirecrawl,
+        //     schema: StoriesSchema, // The Zod schema for expected JSON
+        //   }
+        // );
+
+        const scrapeResult = await app.scrapeUrl(source, {
+          formats: ["extract"],
+          extract: { prompt: promptForFirecrawl, schema: StoriesSchema },
+        });
 
         if (!scrapeResult.success) {
           throw new Error(`Failed to scrape: ${scrapeResult.error}`);
         }
+        console.log(
+          `Scraped results from ${source}: ${JSON.stringify(scrapeResult)}`
+        );
 
         // The structured data
-        const todayStories = scrapeResult.data;
-        console.log(`Found ${todayStories.stories.length} stories from ${source}`);
+        // const todayStories = scrapeResult.data;
+        const todayStories = scrapeResult.extract as any;
+        console.log(todayStories);
+        console.log(
+          `Found ${todayStories.stories.length} stories from ${source}`
+        );
         combinedText.stories.push(...todayStories.stories);
       }
     }
