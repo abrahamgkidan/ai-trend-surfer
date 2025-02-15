@@ -1,9 +1,10 @@
 {
-  "name": "trend-finder",
+  "name": "trend-surfer",
   "version": "1.0.0",
   "main": "src/index.ts",
   "scripts": {
-    "start": "nodemon src/index.ts",
+    "start": "node dist/index.js",
+    "dev": "nodemon src/index.js",
     "build": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -23,7 +24,6 @@
     "@mendable/firecrawl-js": "^1.8.1",
     "@supabase/supabase-js": "^2.46.1",
     "dotenv": "^14.3.2",
-    "express": "^4.21.2",
     "express-async-handler": "^1.2.0",
     "firecrawl": "^1.7.2",
     "node-cron": "^3.0.3",
